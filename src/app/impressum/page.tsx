@@ -56,10 +56,10 @@ export default function ImpressumPage() {
                   <p>
                     Telefon:{" "}
                     <a
-                      href="tel:+41614011818"
+                      href="tel:+41613130215"
                       className="text-blue-600 underline decoration-blue-200 underline-offset-2 transition-colors duration-200 hover:text-blue-800 hover:decoration-blue-400"
                     >
-                      +41 61 401 18 18
+                      +41 61 313 02 15
                     </a>
                   </p>
                 </div>

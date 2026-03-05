@@ -201,10 +201,10 @@ export default function KontaktPage() {
                           Telefon
                         </p>
                         <a
-                          href="tel:+41614011818"
+                          href="tel:+41613130215"
                           className="mt-1 block text-sm text-gray-500 transition-colors duration-200 hover:text-blue-600"
                         >
-                          +41 61 401 18 18
+                          +41 61 313 02 15
                         </a>
                       </div>
                     </div>
@@ -218,7 +218,7 @@ export default function KontaktPage() {
                           \u00d6ffnungszeiten
                         </p>
                         <p className="mt-1 text-sm text-gray-500">
-                          Mo-Fr 07:00-17:00
+                          Mo-Fr 07:30 – 12:00, 13:00 – 17:30
                         </p>
                       </div>
                     </div>

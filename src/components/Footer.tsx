@@ -1,7 +1,7 @@
 'use client';
 
 import Link from 'next/link';
-import { Phone, Mail, MapPin } from 'lucide-react';
+import { Phone, Mail, MapPin, Linkedin, Instagram } from 'lucide-react';
 
 const dienstleistungen = [
   { label: 'CNC Fräsen', href: '/dienstleistungen' },
@@ -35,6 +35,26 @@ export default function Footer() {
               Ihr zuverlässiger Partner seit über 50 Jahren für technische
               Kunststoffteile und Apparatebau.
             </p>
+            <div className="mt-6 flex items-center gap-4">
+              <a
+                href="https://www.linkedin.com/company/certusplastics/"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex h-9 w-9 items-center justify-center rounded-lg bg-white/5 text-gray-400 transition-all duration-200 hover:bg-white/10 hover:text-white"
+                aria-label="LinkedIn"
+              >
+                <Linkedin className="h-4 w-4" />
+              </a>
+              <a
+                href="https://www.instagram.com/certus_plastics"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex h-9 w-9 items-center justify-center rounded-lg bg-white/5 text-gray-400 transition-all duration-200 hover:bg-white/10 hover:text-white"
+                aria-label="Instagram"
+              >
+                <Instagram className="h-4 w-4" />
+              </a>
+            </div>
           </div>
 
           {/* Column 2: Dienstleistungen */}
@@ -102,11 +122,11 @@ export default function Footer() {
               </li>
               <li>
                 <Link
-                  href="tel:+41614011818"
+                  href="tel:+41613130215"
                   className="flex items-center gap-3 text-gray-400 text-sm hover:text-white transition-colors duration-200"
                 >
                   <Phone className="w-4 h-4 shrink-0" />
-                  +41 61 401 18 18
+                  +41 61 313 02 15
                 </Link>
               </li>
             </ul>
@@ -118,7 +138,7 @@ export default function Footer() {
       <div className="border-t border-white/10">
         <div className="max-w-7xl mx-auto px-6 sm:px-8 lg:px-12 py-6 flex flex-col sm:flex-row items-center justify-between gap-4">
           <p className="text-gray-500 text-xs">
-            &copy; 2024 Certus Kunststoff AG. Alle Rechte vorbehalten.
+            &copy; {new Date().getFullYear()} Certus Kunststoff AG. Alle Rechte vorbehalten.
           </p>
           <div className="flex items-center gap-6">
             <Link
