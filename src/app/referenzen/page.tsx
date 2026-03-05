@@ -1,6 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
+import Image from "next/image";
 import {
   FlaskConical,
   Factory,
@@ -22,6 +23,8 @@ export default function ReferenzenPage() {
       description:
         "Komplette Laborausstattung mit Abzugshauben, Auffangwannen und Schutzverkleidungen aus PVC und PP f\u00fcr ein renommiertes Schweizer Forschungsinstitut.",
       gradient: "from-purple-900 to-purple-600",
+      image: "/images/referenz-pharma.png",
+      alt: "Pharmazeutische Laborausstattung aus Kunststoff",
     },
     {
       icon: Factory,
@@ -30,6 +33,8 @@ export default function ReferenzenPage() {
       description:
         "Konstruktion und Fertigung einer kompletten Aufbereitungsanlage aus PVDF und PP f\u00fcr die chemische Industrie mit massgeschneiderten Beh\u00e4ltern und Rohrleitungen.",
       gradient: "from-blue-900 to-blue-600",
+      image: "/images/workshop-overview.png",
+      alt: "Werkstattübersicht mit Aufbereitungsanlage",
     },
     {
       icon: Cpu,
@@ -38,6 +43,8 @@ export default function ReferenzenPage() {
       description:
         "Serienfertigung von hochpr\u00e4zisen PEEK- und PTFE-Komponenten f\u00fcr medizintechnische Ger\u00e4te mit Toleranzen im Hundertstelbereich.",
       gradient: "from-teal-900 to-teal-600",
+      image: "/images/cnc-fraesen.png",
+      alt: "CNC-Fräsung von Präzisionsteilen für Medizintechnik",
     },
     {
       icon: UtensilsCrossed,
@@ -46,6 +53,8 @@ export default function ReferenzenPage() {
       description:
         "FDA-konforme Gleitschienen, F\u00fchrungen und Verschleissteile aus metalldetektierbarem Kunststoff f\u00fcr eine grosse Lebensmittelproduktionsanlage.",
       gradient: "from-orange-900 to-orange-600",
+      image: "/images/food-grade.png",
+      alt: "Lebensmittelkonforme Kunststoffteile",
     },
     {
       icon: Cog,
@@ -54,6 +63,8 @@ export default function ReferenzenPage() {
       description:
         "Individuelle Schutzh\u00e4uben und Maschinenverkleidungen aus PC und PVC f\u00fcr einen f\u00fchrenden Schweizer Maschinenbauer.",
       gradient: "from-indigo-900 to-indigo-600",
+      image: "/images/materials.png",
+      alt: "Kunststoff-Materialien für Maschinenverkleidungen",
     },
     {
       icon: Wrench,
@@ -62,6 +73,8 @@ export default function ReferenzenPage() {
       description:
         "Massanfertigung von Isolationsteilen und Schutzgeh\u00e4usen aus Hartgewebe und Pertinax f\u00fcr Hochspannungsanlagen eines Energieversorgers.",
       gradient: "from-red-900 to-red-600",
+      image: "/images/apparatebau.png",
+      alt: "Kunststoff-Apparatebau für Hochspannungsisolation",
     },
   ];
 
@@ -103,13 +116,17 @@ export default function ReferenzenPage() {
                   transition={{ duration: 0.3 }}
                   className="group flex h-full flex-col overflow-hidden rounded-2xl border border-gray-100 bg-white shadow-sm transition-shadow duration-300 hover:shadow-xl"
                 >
-                  {/* Gradient Image Placeholder */}
+                  {/* Project Image */}
                   <div
-                    className={`relative h-52 bg-gradient-to-br ${project.gradient}`}
+                    className={`relative h-52`}
                   >
-                    <div className="absolute inset-0 flex items-center justify-center">
-                      <project.icon className="h-16 w-16 text-white/30" />
-                    </div>
+                    <Image
+                      src={project.image}
+                      alt={project.alt}
+                      fill
+                      className="object-cover"
+                    />
+                    <div className={`absolute inset-0 bg-gradient-to-br ${project.gradient} opacity-40`} />
                     <div className="absolute top-4 left-4">
                       <span className="rounded-full bg-white/20 px-3 py-1 text-xs font-medium text-white backdrop-blur-sm">
                         {project.category}

@@ -1,5 +1,6 @@
 "use client";
 
+import { useState, type FormEvent } from "react";
 import { motion } from "framer-motion";
 import {
   MapPin,
@@ -7,11 +8,58 @@ import {
   Phone,
   Clock,
   Send,
+  CheckCircle,
+  AlertCircle,
+  Loader2,
 } from "lucide-react";
 import AnimateIn from "@/components/AnimateIn";
 import SectionHeading from "@/components/SectionHeading";
 
 export default function KontaktPage() {
+  const [formData, setFormData] = useState({
+    name: "",
+    email: "",
+    telefon: "",
+    betreff: "",
+    nachricht: "",
+  });
+  const [status, setStatus] = useState<"idle" | "loading" | "success" | "error">("idle");
+  const [message, setMessage] = useState("");
+
+  const handleChange = (
+    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
+  ) => {
+    setFormData((prev) => ({ ...prev, [e.target.name]: e.target.value }));
+  };
+
+  const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    setStatus("loading");
+    setMessage("");
+
+    try {
+      const res = await fetch("/api/contact", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(formData),
+      });
+
+      const data = await res.json();
+
+      if (data.success) {
+        setStatus("success");
+        setMessage(data.message);
+        setFormData({ name: "", email: "", telefon: "", betreff: "", nachricht: "" });
+      } else {
+        setStatus("error");
+        setMessage(data.error || "Ein Fehler ist aufgetreten.");
+      }
+    } catch {
+      setStatus("error");
+      setMessage("Verbindungsfehler. Bitte versuchen Sie es später erneut.");
+    }
+  };
+
   return (
     <>
       {/* Hero Section */}
@@ -48,7 +96,21 @@ export default function KontaktPage() {
                   F\u00fcllen Sie das Formular aus und wir melden uns bei Ihnen.
                 </p>
 
-                <form className="mt-8 space-y-6">
+                {status === "success" && (
+                  <div className="mt-6 flex items-start gap-3 rounded-lg border border-green-200 bg-green-50 p-4">
+                    <CheckCircle className="mt-0.5 h-5 w-5 shrink-0 text-green-600" />
+                    <p className="text-sm text-green-800">{message}</p>
+                  </div>
+                )}
+
+                {status === "error" && (
+                  <div className="mt-6 flex items-start gap-3 rounded-lg border border-red-200 bg-red-50 p-4">
+                    <AlertCircle className="mt-0.5 h-5 w-5 shrink-0 text-red-600" />
+                    <p className="text-sm text-red-800">{message}</p>
+                  </div>
+                )}
+
+                <form className="mt-8 space-y-6" onSubmit={handleSubmit}>
                   <div>
                     <label
                       htmlFor="name"
@@ -61,7 +123,10 @@ export default function KontaktPage() {
                       id="name"
                       name="name"
                       required
-                      className="mt-2 block w-full rounded-lg border border-gray-200 bg-white px-4 py-3 text-sm text-gray-900 placeholder-gray-400 transition-all duration-200 focus:border-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-500/20"
+                      value={formData.name}
+                      onChange={handleChange}
+                      disabled={status === "loading"}
+                      className="mt-2 block w-full rounded-lg border border-gray-200 bg-white px-4 py-3 text-sm text-gray-900 placeholder-gray-400 transition-all duration-200 focus:border-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-500/20 disabled:cursor-not-allowed disabled:opacity-60"
                       placeholder="Ihr Name"
                     />
                   </div>
@@ -79,7 +144,10 @@ export default function KontaktPage() {
                         id="email"
                         name="email"
                         required
-                        className="mt-2 block w-full rounded-lg border border-gray-200 bg-white px-4 py-3 text-sm text-gray-900 placeholder-gray-400 transition-all duration-200 focus:border-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-500/20"
+                        value={formData.email}
+                        onChange={handleChange}
+                        disabled={status === "loading"}
+                        className="mt-2 block w-full rounded-lg border border-gray-200 bg-white px-4 py-3 text-sm text-gray-900 placeholder-gray-400 transition-all duration-200 focus:border-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-500/20 disabled:cursor-not-allowed disabled:opacity-60"
                         placeholder="ihre@email.ch"
                       />
                     </div>
@@ -94,7 +162,10 @@ export default function KontaktPage() {
                         type="tel"
                         id="telefon"
                         name="telefon"
-                        className="mt-2 block w-full rounded-lg border border-gray-200 bg-white px-4 py-3 text-sm text-gray-900 placeholder-gray-400 transition-all duration-200 focus:border-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-500/20"
+                        value={formData.telefon}
+                        onChange={handleChange}
+                        disabled={status === "loading"}
+                        className="mt-2 block w-full rounded-lg border border-gray-200 bg-white px-4 py-3 text-sm text-gray-900 placeholder-gray-400 transition-all duration-200 focus:border-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-500/20 disabled:cursor-not-allowed disabled:opacity-60"
                         placeholder="+41 ..."
                       />
                     </div>
@@ -112,7 +183,10 @@ export default function KontaktPage() {
                       id="betreff"
                       name="betreff"
                       required
-                      className="mt-2 block w-full rounded-lg border border-gray-200 bg-white px-4 py-3 text-sm text-gray-900 placeholder-gray-400 transition-all duration-200 focus:border-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-500/20"
+                      value={formData.betreff}
+                      onChange={handleChange}
+                      disabled={status === "loading"}
+                      className="mt-2 block w-full rounded-lg border border-gray-200 bg-white px-4 py-3 text-sm text-gray-900 placeholder-gray-400 transition-all duration-200 focus:border-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-500/20 disabled:cursor-not-allowed disabled:opacity-60"
                       placeholder="Worum geht es?"
                     />
                   </div>
@@ -129,19 +203,32 @@ export default function KontaktPage() {
                       name="nachricht"
                       rows={5}
                       required
-                      className="mt-2 block w-full resize-none rounded-lg border border-gray-200 bg-white px-4 py-3 text-sm text-gray-900 placeholder-gray-400 transition-all duration-200 focus:border-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-500/20"
+                      value={formData.nachricht}
+                      onChange={handleChange}
+                      disabled={status === "loading"}
+                      className="mt-2 block w-full resize-none rounded-lg border border-gray-200 bg-white px-4 py-3 text-sm text-gray-900 placeholder-gray-400 transition-all duration-200 focus:border-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-500/20 disabled:cursor-not-allowed disabled:opacity-60"
                       placeholder="Ihre Nachricht..."
                     />
                   </div>
 
                   <motion.button
                     type="submit"
-                    whileHover={{ scale: 1.02 }}
-                    whileTap={{ scale: 0.98 }}
-                    className="inline-flex w-full items-center justify-center gap-2 rounded-lg bg-[#0a1628] px-8 py-3.5 text-sm font-semibold text-white transition-colors duration-200 hover:bg-[#1e3a5f] sm:w-auto"
+                    disabled={status === "loading"}
+                    whileHover={status !== "loading" ? { scale: 1.02 } : {}}
+                    whileTap={status !== "loading" ? { scale: 0.98 } : {}}
+                    className="inline-flex w-full items-center justify-center gap-2 rounded-lg bg-[#0a1628] px-8 py-3.5 text-sm font-semibold text-white transition-colors duration-200 hover:bg-[#1e3a5f] disabled:cursor-not-allowed disabled:opacity-60 sm:w-auto"
                   >
-                    <Send className="h-4 w-4" />
-                    Nachricht senden
+                    {status === "loading" ? (
+                      <>
+                        <Loader2 className="h-4 w-4 animate-spin" />
+                        Wird gesendet...
+                      </>
+                    ) : (
+                      <>
+                        <Send className="h-4 w-4" />
+                        Nachricht senden
+                      </>
+                    )}
                   </motion.button>
                 </form>
               </div>

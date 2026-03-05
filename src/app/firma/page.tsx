@@ -1,6 +1,7 @@
 'use client';
 
 import Link from 'next/link';
+import Image from 'next/image';
 import { motion } from 'framer-motion';
 import AnimateIn from '@/components/AnimateIn';
 import SectionHeading from '@/components/SectionHeading';
@@ -76,29 +77,13 @@ export default function FirmaPage() {
 
             {/* Image placeholder */}
             <AnimateIn direction="right" delay={0.15}>
-              <div className="relative aspect-[4/3] w-full overflow-hidden rounded-2xl bg-gradient-to-br from-[#0a1628] via-[#1e3a5f] to-blue-600 shadow-2xl">
-                <div className="absolute inset-0 flex items-center justify-center">
-                  <div className="text-center">
-                    <div className="mx-auto mb-4 flex h-16 w-16 items-center justify-center rounded-full bg-white/10 backdrop-blur-sm">
-                      <svg
-                        className="h-8 w-8 text-white/60"
-                        fill="none"
-                        viewBox="0 0 24 24"
-                        stroke="currentColor"
-                        strokeWidth={1.5}
-                      >
-                        <path
-                          strokeLinecap="round"
-                          strokeLinejoin="round"
-                          d="M2.25 15.75l5.159-5.159a2.25 2.25 0 013.182 0l5.159 5.159m-1.5-1.5l1.409-1.409a2.25 2.25 0 013.182 0l2.909 2.909M3.75 21h16.5A2.25 2.25 0 0022.5 18.75V5.25A2.25 2.25 0 0020.25 3H3.75A2.25 2.25 0 001.5 5.25v13.5A2.25 2.25 0 003.75 21z"
-                        />
-                      </svg>
-                    </div>
-                    <p className="text-sm font-medium text-white/40">
-                      Firmenbild
-                    </p>
-                  </div>
-                </div>
+              <div className="relative aspect-[4/3] w-full overflow-hidden rounded-2xl shadow-2xl">
+                <Image
+                  src="/images/workshop-overview.png"
+                  alt="Werkstattübersicht der Certus Kunststoff AG"
+                  fill
+                  className="object-cover"
+                />
                 {/* Decorative glow */}
                 <div className="pointer-events-none absolute -bottom-20 -right-20 h-60 w-60 rounded-full bg-blue-400/20 blur-[80px]" />
               </div>
@@ -247,34 +232,13 @@ export default function FirmaPage() {
           <div className="grid items-center gap-16 lg:grid-cols-2 lg:gap-24">
             {/* Map placeholder */}
             <AnimateIn direction="left">
-              <div className="relative aspect-[4/3] w-full overflow-hidden rounded-2xl bg-gradient-to-br from-gray-200 via-gray-100 to-gray-200 shadow-lg">
-                <div className="absolute inset-0 flex items-center justify-center">
-                  <div className="text-center">
-                    <div className="mx-auto mb-4 flex h-16 w-16 items-center justify-center rounded-full bg-white shadow-sm">
-                      <svg
-                        className="h-8 w-8 text-gray-400"
-                        fill="none"
-                        viewBox="0 0 24 24"
-                        stroke="currentColor"
-                        strokeWidth={1.5}
-                      >
-                        <path
-                          strokeLinecap="round"
-                          strokeLinejoin="round"
-                          d="M15 10.5a3 3 0 11-6 0 3 3 0 016 0z"
-                        />
-                        <path
-                          strokeLinecap="round"
-                          strokeLinejoin="round"
-                          d="M19.5 10.5c0 7.142-7.5 11.25-7.5 11.25S4.5 17.642 4.5 10.5a7.5 7.5 0 1115 0z"
-                        />
-                      </svg>
-                    </div>
-                    <p className="text-sm font-medium text-gray-400">
-                      Kartenansicht
-                    </p>
-                  </div>
-                </div>
+              <div className="relative aspect-[4/3] w-full overflow-hidden rounded-2xl shadow-lg">
+                <Image
+                  src="/images/team-workshop.png"
+                  alt="Werkstatt der Certus Kunststoff AG in Birsfelden aus der Vogelperspektive"
+                  fill
+                  className="object-cover"
+                />
               </div>
             </AnimateIn>
 

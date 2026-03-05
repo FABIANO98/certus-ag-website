@@ -2,6 +2,7 @@
 
 import { motion } from 'framer-motion';
 import Link from 'next/link';
+import Image from 'next/image';
 import AnimateIn from '@/components/AnimateIn';
 import SectionHeading from '@/components/SectionHeading';
 import {
@@ -34,6 +35,8 @@ const services = [
       'CAD/CAM-gestutzte Programmierung',
     ],
     gradient: 'from-blue-600 to-blue-800',
+    image: '/images/cnc-fraesen.png',
+    alt: 'CNC-Fräsmaschine bei der Kunststoffbearbeitung',
   },
   {
     id: 'cnc-drehen',
@@ -49,6 +52,8 @@ const services = [
       'Einzelteile und Serien',
     ],
     gradient: 'from-indigo-600 to-indigo-800',
+    image: '/images/cnc-drehen.png',
+    alt: 'CNC-Drehmaschine bei der Fertigung von Kunststoff-Drehteilen',
   },
   {
     id: 'kunststoff-schweissen',
@@ -64,6 +69,8 @@ const services = [
       'Zertifizierte Schweisser',
     ],
     gradient: 'from-orange-500 to-red-600',
+    image: '/images/schweissen.png',
+    alt: 'Kunststoff-Schweissarbeiten in der Werkstatt',
   },
   {
     id: 'apparatebau',
@@ -79,6 +86,8 @@ const services = [
       'Individuelle Sonderkonstruktionen',
     ],
     gradient: 'from-emerald-600 to-teal-700',
+    image: '/images/apparatebau.png',
+    alt: 'Kunststoff-Apparatebau und Behälterfertigung',
   },
   {
     id: 'kunststoffbearbeitung',
@@ -94,6 +103,8 @@ const services = [
       'Baugruppenmontage',
     ],
     gradient: 'from-violet-600 to-purple-800',
+    image: '/images/produkte-overview.png',
+    alt: 'Verschiedene Kunststoffteile aus der Fertigung',
   },
   {
     id: 'lohnfertigung',
@@ -109,6 +120,8 @@ const services = [
       'Lager- und Logistikservice',
     ],
     gradient: 'from-slate-600 to-slate-800',
+    image: '/images/workshop-overview.png',
+    alt: 'Werkstattübersicht für Lohnfertigung',
   },
 ];
 
@@ -199,12 +212,15 @@ export default function DienstleistungenPage() {
                     delay={0.1}
                   >
                     <div
-                      className={`relative aspect-[4/3] w-full overflow-hidden rounded-2xl bg-gradient-to-br ${service.gradient} shadow-xl`}
+                      className={`relative aspect-[4/3] w-full overflow-hidden rounded-2xl shadow-xl`}
                     >
-                      {/* Decorative elements inside placeholder */}
-                      <div className="absolute inset-0 flex items-center justify-center">
-                        <Icon className="h-24 w-24 text-white/20" strokeWidth={1} />
-                      </div>
+                      <Image
+                        src={service.image}
+                        alt={service.alt}
+                        fill
+                        className="object-cover"
+                      />
+                      <div className={`absolute inset-0 bg-gradient-to-br ${service.gradient} opacity-30`} />
                       <div className="absolute bottom-0 left-0 right-0 h-1/3 bg-gradient-to-t from-black/20 to-transparent" />
                     </div>
                   </AnimateIn>

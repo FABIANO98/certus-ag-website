@@ -2,6 +2,7 @@
 
 import { useRef } from 'react';
 import Link from 'next/link';
+import Image from 'next/image';
 import {
   motion,
   useScroll,
@@ -54,8 +55,14 @@ function HeroSection() {
         style={{ y: bgY }}
         className="absolute inset-0 -top-[10%] -bottom-[10%]"
       >
-        {/* Gradient background simulating industrial CNC atmosphere */}
-        <div className="absolute inset-0 bg-gradient-to-br from-[#0a1628] via-[#142744] to-[#1e3a5f]" />
+        {/* Hero background image */}
+        <Image
+          src="/images/hero-cnc.png"
+          alt="CNC-Maschine in der Werkstatt von Certus Kunststoff AG"
+          fill
+          className="object-cover"
+          priority
+        />
 
         {/* Decorative machinery-like geometric elements */}
         <div className="absolute inset-0 overflow-hidden">
@@ -535,16 +542,22 @@ const referenzen = [
     title: 'Laborger\u00e4te-Komponenten',
     category: 'Labor & Pharma',
     gradient: 'from-blue-600 to-blue-800',
+    image: '/images/referenz-pharma.png',
+    alt: 'Pharmazeutischer Apparatebau aus Kunststoff',
   },
   {
     title: 'Industrieanlage-Baugruppe',
     category: 'Maschinenbau',
     gradient: 'from-slate-600 to-slate-800',
+    image: '/images/workshop-overview.png',
+    alt: 'Werkstattübersicht Certus Kunststoff AG',
   },
   {
     title: 'Hochspannungs-Isolatoren',
     category: 'Hochspannungstechnik',
     gradient: 'from-indigo-600 to-indigo-800',
+    image: '/images/materials.png',
+    alt: 'Kunststoff-Materialproben für Isolationstechnik',
   },
 ];
 
@@ -567,15 +580,18 @@ function ReferenzenSection() {
                 }}
                 className="group relative aspect-[4/3] rounded-2xl overflow-hidden cursor-pointer"
               >
-                {/* Gradient placeholder for project image */}
-                <div
-                  className={`absolute inset-0 bg-gradient-to-br ${ref.gradient}`}
+                {/* Project image */}
+                <Image
+                  src={ref.image}
+                  alt={ref.alt}
+                  fill
+                  className="object-cover"
                 />
 
-                {/* Decorative elements inside card */}
-                <div className="absolute inset-0 flex items-center justify-center">
-                  <Factory className="w-16 h-16 text-white/10" />
-                </div>
+                {/* Gradient overlay */}
+                <div
+                  className={`absolute inset-0 bg-gradient-to-br ${ref.gradient} opacity-40`}
+                />
 
                 {/* Overlay */}
                 <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent" />

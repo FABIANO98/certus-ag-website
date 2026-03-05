@@ -4,6 +4,7 @@ import "./globals.css";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import ScrollToTop from "@/components/ScrollToTop";
+import { LanguageProvider } from "@/i18n/LanguageContext";
 
 const inter = Inter({
   variable: "--font-inter",
@@ -47,10 +48,12 @@ export default function RootLayout({
   return (
     <html lang="de" className={inter.variable}>
       <body className="antialiased">
-        <ScrollToTop />
-        <Navbar />
-        <main className="min-h-screen">{children}</main>
-        <Footer />
+        <LanguageProvider>
+          <ScrollToTop />
+          <Navbar />
+          <main className="min-h-screen">{children}</main>
+          <Footer />
+        </LanguageProvider>
       </body>
     </html>
   );

@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import Image from "next/image";
 import { motion } from "framer-motion";
 import {
   Shield,
@@ -57,11 +58,15 @@ export default function ProduktePage() {
   return (
     <>
       {/* Hero Section */}
-      <section className="relative overflow-hidden bg-gradient-to-br from-[#0a1628] to-[#1e3a5f] py-28 md:py-36">
-        <div className="absolute inset-0 opacity-10">
-          <div className="absolute top-1/4 left-1/4 h-96 w-96 rounded-full bg-blue-500 blur-[120px]" />
-          <div className="absolute bottom-1/4 right-1/4 h-64 w-64 rounded-full bg-blue-400 blur-[100px]" />
-        </div>
+      <section className="relative overflow-hidden bg-[#0a1628] py-28 md:py-36">
+        <Image
+          src="/images/produkte-overview.png"
+          alt="Übersicht verschiedener Kunststoffprodukte von Certus AG"
+          fill
+          className="object-cover opacity-30"
+          priority
+        />
+        <div className="absolute inset-0 bg-gradient-to-br from-[#0a1628]/80 to-[#1e3a5f]/80" />
         <div className="relative mx-auto max-w-7xl px-6 lg:px-8">
           <AnimateIn>
             <div className="mx-auto max-w-3xl text-center">

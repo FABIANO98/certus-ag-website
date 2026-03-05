@@ -4,21 +4,26 @@ import { useState, useEffect, useCallback } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { motion, AnimatePresence } from "framer-motion";
+import LanguageSwitcher from "./LanguageSwitcher";
+import { useTranslation } from "@/i18n/LanguageContext";
 
-const navLinks = [
-  { href: "/", label: "Home" },
-  { href: "/firma", label: "Firma" },
-  { href: "/dienstleistungen", label: "Dienstleistungen" },
-  { href: "/produkte", label: "Produkte" },
-  { href: "/branchen", label: "Branchen" },
-  { href: "/referenzen", label: "Referenzen" },
-  { href: "/kontakt", label: "Kontakt" },
+const navLinkKeys = [
+  { href: "/", key: "nav.home" },
+  { href: "/firma", key: "nav.firma" },
+  { href: "/dienstleistungen", key: "nav.dienstleistungen" },
+  { href: "/produkte", key: "nav.produkte" },
+  { href: "/branchen", key: "nav.branchen" },
+  { href: "/referenzen", key: "nav.referenzen" },
+  { href: "/kontakt", key: "nav.kontakt" },
 ] as const;
 
 export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
   const [hasScrolled, setHasScrolled] = useState(false);
   const pathname = usePathname();
+  const { t } = useTranslation();
+
+  const navLinks = navLinkKeys.map(({ href, key }) => ({ href, label: t(key) }));
 
   const handleScroll = useCallback(() => {
     setHasScrolled(window.scrollY > 10);
@@ -96,13 +101,18 @@ export default function Navbar() {
                 </Link>
               </li>
             ))}
+            <li className="ml-2">
+              <LanguageSwitcher />
+            </li>
           </ul>
 
-          {/* Mobile Menu Toggle */}
+          {/* Mobile: Language Switcher + Menu Toggle */}
+          <div className="flex items-center gap-3 lg:hidden">
+            <LanguageSwitcher />
           <button
             type="button"
             onClick={() => setIsOpen(!isOpen)}
-            className="relative z-10 flex h-10 w-10 items-center justify-center rounded-lg transition-colors duration-200 hover:bg-[#0a1628]/5 lg:hidden"
+            className="relative z-10 flex h-10 w-10 items-center justify-center rounded-lg transition-colors duration-200 hover:bg-[#0a1628]/5"
             aria-label={isOpen ? "Menu schliessen" : "Menu oeffnen"}
             aria-expanded={isOpen}
           >
@@ -124,6 +134,7 @@ export default function Navbar() {
               />
             </div>
           </button>
+          </div>
         </nav>
       </header>
 
